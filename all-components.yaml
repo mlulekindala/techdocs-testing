@@ -6,3 +6,4 @@ metadata:
 spec:
   targets:
     - ./doc-02.yaml
+    - ./bcp-artifacts.yaml
