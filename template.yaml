@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Template
 metadata:
   name: docs-template-for-dummies
-  title: Documentation Template
+  title: Documentation Template for dummies
   description: Create a new standalone documentation project
   tags:
     - recommended
