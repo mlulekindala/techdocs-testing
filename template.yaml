@@ -3,7 +3,7 @@ kind: Template
 metadata:
   name: docs-template-for-dummies
   title: Documentation Template for dummies
-  description: Create a new standalone documentation project
+  description: Create a new standalone documentation project for dummies
   tags:
     - recommended
     - techdocs
