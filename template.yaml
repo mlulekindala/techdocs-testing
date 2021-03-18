@@ -18,13 +18,17 @@ spec:
     required:
       - component_id
       - description
+      - dummyProperty
     properties:
       component_id:
         title: Name
         type: string
         pattern: ^[a-z0-9A-Z_.-]{1,63}$
         description: Unique name of the component
-        dummyProperty: This is a property for dummies
+      dummyProperty:
+        title: Dummy property
+        type: string
+        description: This is a property for dummies
       description:
         title: Description
         type: string
