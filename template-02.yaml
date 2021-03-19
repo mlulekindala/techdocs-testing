@@ -1,64 +1,30 @@
-apiVersion: backstage.io/v1beta2
+apiVersion: backstage.io/v1alpha1
 kind: Template
 metadata:
-  name: v1beta2-demo
-  title: Test Action template
-  description: scaffolder v1beta2 template demo
+  name: docs-template
+  title: Documentation Template
+  description: Create a new standalone documentation project
+  tags:
+    - recommended
+    - techdocs
+    - mkdocs
 spec:
   owner: backstage/techdocs-core
-  type: service
+  templater: cookiecutter
+  type: documentation
+  path: '.'
 
-  parameters:
-    - title: Fill in some steps
-      required:
-        - name
-      properties:
-        name:
-          title: Name
-          type: string
-          description: Unique name of the component
-          ui:autofocus: true
-          ui:options:
-            rows: 5
-    - title: Choose a location
-      required:
-        - repoUrl
-      properties:
-        repoUrl:
-          title: Repository Location
-          type: string
-          ui:field: RepoUrlPicker
-          ui:options:
-            allowedHosts:
-              - github.com
-
-  steps:
-    - id: fetch-base
-      name: Fetch Base
-      action: fetch:cookiecutter
-      input:
-        url: ./template
-        values:
-          name: '{{ parameters.name }}'
-
-    - id: fetch-docs
-      name: Fetch Docs
-      action: fetch:plain
-      input:
-        targetPath: ./community
-        url: https://github.com/backstage/community/tree/main/backstage-community-sessions
-
-    - id: publish
-      name: Publish
-      action: publish:github
-      input:
-        allowedHosts: ['github.com']
-        description: 'This is {{ parameters.name }}'
-        repoUrl: '{{ parameters.repoUrl }}'
-
-    - id: register
-      name: Register
-      action: catalog:register
-      input:
-        repoContentsUrl: '{{ steps.publish.output.repoContentsUrl }}'
-        catalogInfoPath: '/catalog-info.yaml'
+  schema:
+    required:
+      - component_id
+      - description
+    properties:
+      component_id:
+        title: Name
+        type: string
+        pattern: ^[a-z0-9A-Z_.-]{1,63}$
+        description: Unique name of the component
+      description:
+        title: Description
+        type: string
+        description: Help others understand what these docs are about.
